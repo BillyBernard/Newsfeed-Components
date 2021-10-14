@@ -86,8 +86,33 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
-  }
+  },
 ];
+
+const newArticles = [
+  {
+  title: 'Ice Hockey vs Roller Hockey',
+  date: 'Aug 1st, 2021',
+  firstParagraph: `The first recorded use of the word hockey is in the 1773 book Juvenile Sports and Pastimes, to Which Are Prefixed, Memoirs of the Author: Including a New Mode of Infant Education by Richard Johnson (Pseud. Master Michel Angelo), whose chapter XI was titled "New Improvements on the Game of Hockey". The belief that hockey was mentioned in a 1363 proclamation by King Edward III of England is based on modern translations of the proclamation, which was originally in Latin and explicitly forbade the games "Pilam Manualem, Pedivam, & Bacularem: & ad Canibucam & Gallorum Pugnam". The English historian and biographer John Strype did not use the word "hockey" when he translated the proclamation in 1720, instead translating "Canibucam" as "Cambuck"; this may have referred to either an early form of hockey or a game more similar to golf or croquet.`,
+
+  secondParagraph: `The word hockey itself is of unknown origin. One supposition is that it is a derivative of hoquet, a Middle French word for a shepherd's stave. The curved, or "hooked" ends of the sticks used for hockey would indeed have resembled these staves. Another supposition derives from the known use of cork bungs (stoppers), in place of wooden balls to play the game. The stoppers came from barrels containing "hock" ale, also called "hocky".`,
+
+  thirdParagraph: `By the 19th century, the various forms and divisions of historic games began to differentiate and coalesce into the individual sports defined today. Organizations dedicated to the codification of rules and regulations began to form, and national and international bodies sprang up to manage domestic and international competition.`
+},
+{
+  title: 'Gibberish Article',
+  date: 'Dec 20th, 1999',
+
+  firstParagraph:`dsahgfsdahgfjhasdfjhasgfhjasdfjasdjhfjahsdfhjkasghfdhasjgfhjdsagfkjhgasdulhgsaldhjgjkashlguihsadurfhehfuahfuhsdjkafhjkashfjdshafjkhasjdfhjsakhfjkhasdjfklhajslkhfdjkadshfjdasncjadnsjhbfjsdahjklfhajsklfhjksdhfjksdlahfjhdksjafhkjasdlhfkjlahdfsuiaheurihuseaydyfhudshafjashdfjhdjshflkahdfjhjdaslkfhdjk`,
+
+  secondParagraph:`akusgfhjkasgfdhjkasgfhjgayjegfhajskdgfkhkkffghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjooooooooooooooooooooooooooooooooooooooooooooo`,
+
+  thirdParagraph:`sddddddddddddddddddfdfsggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn`
+}
+];
+
+Array.prototype.push.apply(data, newArticles);
+console.log(data);
 
 /*
   Step 1: Write a component called 'articleMaker' to create an article.
@@ -99,6 +124,10 @@ const data = [
     <p class="date">{date of the article}</p>
 
     {three separate paragraph elements}
+
+    <p></p>
+    <p></p>
+    <p></p>
 
     <span class="expandButton">+</span>
   </div>
@@ -114,3 +143,48 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+const articles = document.querySelector('.articles');
+
+function articleMaker({ title, date, firstParagraph, secondParagraph, thirdParagraph }) {
+  const article = document.createElement('div');
+   const title1 = document.createElement('h2');
+   const date1 = document.createElement('p');
+   const firstPara = document.createElement('p');
+   const secondPara = document.createElement('p');
+   const thirdPara = document.createElement('p');
+   const expButton = document.createElement('span');
+  
+   article.appendChild(title1);
+   article.appendChild(date1);
+   article.appendChild(firstPara);
+   article.appendChild(secondPara);
+   article.appendChild(thirdPara);
+   article.appendChild(expButton);
+  
+  article.classList.add('article');
+  date1.classList.add('date');
+  expButton.classList.add('expandButton');
+
+  title1.textContent = title;
+  date1.textContent = date;
+  firstPara.textContent = firstParagraph;
+  secondPara.textContent = secondParagraph;
+  thirdPara.textContent = thirdParagraph;
+  expButton.textContent = '+';
+
+   expButton.addEventListener('click', () => {
+    article.classList.toggle('article-open');
+   })
+  return article;
+}
+
+const atricleElements = data.map(articleElem => {
+  return articleMaker(articleElem);
+})
+
+atricleElements.forEach(articleElement => {
+  articles.appendChild(articleElement);
+})
+
+

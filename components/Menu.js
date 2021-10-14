@@ -31,3 +31,91 @@ let menuItems = [
 
   Step 6: Use 'menuMaker' to create a menu using the 'menuItems' array, and append the returned menu to the header.
 */
+
+// wrong
+
+// const header = document.querySelector('.header')
+// const menuButton = document.querySelector('.menu-button')
+
+// function menuMaker(menuItems){
+//   const menuDiv = document.createElement('div');
+//   const menuList = document.createElement('ul');
+//   const menuListItem = document.createElement('li');
+
+//   menuDiv.appendChild(menuList);
+//   menuList.appendChild(menuListItem);
+
+//   menuDiv.classList.add('menu');
+  
+//   menuListItem.textContent = menuItems;
+
+//   menuButton.addEventListener('click', () => {
+//     menuDiv.classList.toggle('menu--open')
+//   })
+//   // console.log(menuList)
+//   // console.log(menuListItem)
+//   return menuDiv
+
+// }
+
+// menuItems.forEach(item => {
+//   const linkItem = menuMaker(item);
+//   document.querySelector('div').appendChild(linkItem)
+// })
+
+
+function menuMaker(array) {
+  const menu = document.createElement("div");
+  const ul = document.createElement("ul");
+
+  menu.appendChild(ul);
+  menu.classList.add("menu");
+  
+  array.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    ul.appendChild(li);
+  });
+  
+  const menuButton = document.querySelector(".menu-button");
+  
+  menuButton.addEventListener("click", () => {
+    menu.classList.toggle("menu--open");
+  });
+  
+  return menu;
+}
+
+const header = document.querySelector(".header");
+
+// menuItems.forEach((item) => header.appendChild(menuMaker(item)));
+header.appendChild(menuMaker(menuItems));
+
+
+// function menuMaker(array){
+//   const menuItem = document.createElement('div');
+//   const menuList = document.createElement('ul');
+
+//   menuItem.appendChild(menuList);
+//   menuItem.classList.add('menu');
+
+//   array.ForEach((item) => {
+//     const menuListItem = document.createElement('li');
+//     menuListItem.textContent = item;
+//     menuList.appendChild(menuListItem);
+//   });
+
+//   const menuButton = document.querySelector('.menu-button');
+
+//   menuButton.buttonaddEventListener('click', () => {
+//     menuItem.classList.toggle('menu--open');
+//   });
+
+//   return menuItem;
+// }
+
+// const header = document.querySelector('.header');
+
+// header.appendChild(menuMaker(menuItems));
+
+// menuMaker(menuItems);
